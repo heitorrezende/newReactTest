@@ -1,0 +1,24 @@
+.DS_Store
+/dist/*
+build
+node_modules
+dump.rdb
+yarn.lock
+.eslintcache
+
+# Optional npm cache directory
+.npm
+.npmrc
+
+# Logs
+logs
+*.log
+*.log.*
+
+# Coverage
+.nyc_output/
+coverage*
+.idea/
+
+.npmrc
+src/screens/Cart/FullCart/index.js
