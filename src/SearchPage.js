@@ -1,21 +1,21 @@
 import { useState } from "react";
+import debounce from "lodash.debounce";
 import { Link } from "react-router-dom";
 import { search } from "./BooksAPI";
 import Book from "./Book";
-const SearchPage = ({ refreshShelfs, booksOnShelfs }) => {
-  const [query, setQuery] = useState("");
+const SearchPage = ({ booksOnShelfs, setBooksOnShelfs }) => {
   const [books, setBooks] = useState([]);
 
-  const searchBook = async (bookName) => {
-    setQuery(bookName);
+  const searchBook = debounce((bookName) => {
+    if (!bookName) return setBooks([]);
 
-    await search(bookName, 10)
+    search(bookName, 10)
       .then((response) => {
-        if (response.error) return setBooks([]);
+        if (response.erro) return setBooks([]);
         return setBooks(response);
       })
       .catch((error) => console.log(error));
-  };
+  }, 1000);
 
   return (
     <div className="search-books">
@@ -27,28 +27,24 @@ const SearchPage = ({ refreshShelfs, booksOnShelfs }) => {
           <input
             type="text"
             placeholder="Search by title, author, or ISBN"
-            value={query}
             onChange={(e) => searchBook(e.target.value)}
           />
         </div>
       </div>
       <div className="search-books-results">
         <ol className="books-grid">
-          {books.length
-            ? books.map((book) => (
-                <li key={book.id}>
-                  {
-                    <Book
-                      bookData={book}
-                      refreshShelfs={refreshShelfs}
-                      booksOnShelfs={booksOnShelfs}
-                    ></Book>
-                  }
-                </li>
-              ))
-            : !!query.length && (
-                <h1>Unfortunally we don`t have this book on our libary yet</h1>
-              )}
+          {!!books.length &&
+            books.map((book) => (
+              <li key={book.id}>
+                {
+                  <Book
+                    bookData={book}
+                    booksOnShelfs={booksOnShelfs}
+                    setBooksOnShelfs={setBooksOnShelfs}
+                  ></Book>
+                }
+              </li>
+            ))}
         </ol>
       </div>
     </div>

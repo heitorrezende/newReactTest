@@ -20,7 +20,11 @@ const Pages = () => {
         exact
         path="/"
         element={
-          <App booksOnShelfs={booksOnShelfs} refreshShelfs={refreshShelfs} />
+          <App
+            booksOnShelfs={booksOnShelfs}
+            refreshShelfs={refreshShelfs}
+            setBooksOnShelfs={setBooksOnShelfs}
+          />
         }
       />
       <Route
@@ -30,6 +34,7 @@ const Pages = () => {
           <SearchPage
             booksOnShelfs={booksOnShelfs}
             refreshShelfs={refreshShelfs}
+            setBooksOnShelfs={setBooksOnShelfs}
           />
         }
       />

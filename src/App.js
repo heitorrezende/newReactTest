@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import Shelf from "./Shelf";
 
-function App({ refreshShelfs, booksOnShelfs }) {
+function App({ refreshShelfs, booksOnShelfs, setBooksOnShelfs }) {
   return (
     <div className="app">
       <div className="list-books">
@@ -20,7 +20,8 @@ function App({ refreshShelfs, booksOnShelfs }) {
                   <Shelf
                     books={booksOnShelfs}
                     shelfName={"currentlyReading"}
-                    refreshShelfs={refreshShelfs}
+                    setBooksOnShelfs={setBooksOnShelfs}
+                    booksOnShelfs={booksOnShelfs}
                   />
                 </ol>
               </div>
@@ -32,7 +33,8 @@ function App({ refreshShelfs, booksOnShelfs }) {
                   <Shelf
                     books={booksOnShelfs}
                     shelfName={"wantToRead"}
-                    refreshShelfs={refreshShelfs}
+                    setBooksOnShelfs={setBooksOnShelfs}
+                    booksOnShelfs={booksOnShelfs}
                   />
                 </ol>
               </div>
@@ -44,7 +46,8 @@ function App({ refreshShelfs, booksOnShelfs }) {
                   <Shelf
                     books={booksOnShelfs}
                     shelfName={"read"}
-                    refreshShelfs={refreshShelfs}
+                    setBooksOnShelfs={setBooksOnShelfs}
+                    booksOnShelfs={booksOnShelfs}
                   />
                 </ol>
               </div>
